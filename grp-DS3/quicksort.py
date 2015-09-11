@@ -12,7 +12,9 @@ def partition(A, p, r):
     return i + 1
 
 
-def quicksort(A, p, r):
+def quicksort(A, p = 0, r = None):
+    if r == None:
+        r = len(A) - 1
     if p < r:
         x = np.random.randint(p, r + 1)
         A[r], A[x] = A[x], A[r]
