@@ -19,10 +19,7 @@ class HSFun(object):
         if (r < self.SizeA and A[r] > A[largest]):
             largest = r
         if largest != i:
-            print A
             A[i],A[largest] = A[largest],A[i]
-            print A
-            print "---------------"
             self.MaxHeapify(A,largest)
             
             
@@ -47,10 +44,6 @@ class HSFun(object):
 
 
     def __init__(self):
-        #SizeA = len(A)
-        '''
-        Constructor
-        '''
 
 
 
