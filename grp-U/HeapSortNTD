@@ -1,0 +1,62 @@
+import time
+import numpy.random as nprnd
+
+
+#A.length gives the number of elements in the array
+#A.heap-size represents how many elements are sorted
+
+class HSFun(object):
+
+    def MaxHeapify(self,A,i):
+        #left child of i
+        l = 2*i
+        #right child of i
+        r = 2*i + 1
+        if (l < self.SizeA and A[l] > A[i]):
+            largest = l
+        else:
+            largest = i
+        if (r < self.SizeA and A[r] > A[largest]):
+            largest = r
+        if largest != i:
+            print A
+            A[i],A[largest] = A[largest],A[i]
+            print A
+            print "---------------"
+            self.MaxHeapify(A,largest)
+            
+            
+    def BuildMaxHeap(self,A):
+        self.SizeA = len(A)
+        for i in range(len(A)/2,-1,-1):
+            print i
+            self.MaxHeapify(A,i)
+     
+     
+            
+    def HeapSort(self,A):
+        start = time.time()
+        self.BuildMaxHeap(A)
+        for i in range((len(A)-1),0,-1):
+            A[0],A[i] = A[i],A[0]
+            self.SizeA = self.SizeA -1
+            self.MaxHeapify(A,0)
+        end = time.time()
+        print A,(end-start)
+
+
+
+    def __init__(self):
+        #SizeA = len(A)
+        '''
+        Constructor
+        '''
+
+
+
+
+
+HeapSortCall = HSFun()
+a = nprnd.randint(-1000,1000,10)
+HeapSortCall.HeapSort(a)
+
