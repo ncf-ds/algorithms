@@ -40,11 +40,21 @@ class HeapSort():
                 self.swap(i, greater_node_index)
                 self.down_heap(greater_node_index,size)
     
+    def up_heap(self,i,size):
+        p = self.find_parent(i)
+        if i>0 and i<=size and self.input_list[i] > self.input_list[p]:
+            self.swap(i, p)
+            self.up_heap(p, size)
+    
     def heapify(self,end):
         last_parent = self.find_parent(end)  
         for i in range(last_parent,-1,-1):
             self.down_heap(i,end)   
     
+    def up_heapify(self, end):
+        for i in range(end):
+            self.up_heap(i, end)
+        
     def sort_my_list(self):
         start = time.time()
         N = len(self.input_list)
@@ -53,27 +63,36 @@ class HeapSort():
             self.swap(0,end)
         end  = time.time()
         return end - start
+    
+    def sort_my_list_up_heap(self):
+        start = time.time()
+        N = len(self.input_list)
+        for i in range(N):
+            self.up_heapify(N-i)
+            self.swap(0,N-1)
+        end  = time.time()
+        return end - start
 
 
 if __name__ == "__main__":
-    sample_list = [4,6,1,7,2]
+    sample_list = [0,9,3,4,0,1,9]
     print "Original list: {}".format(sample_list)     
-    HeapSort(sample_list).sort_my_list()        
+    HeapSort(sample_list).sort_my_list_up_heap()        
     print "Sorted list: {}".format(sample_list)
     
-    x= []
-    y= []
-    for n in range(0,1001,40):
-        sample_list = nprnd.randint(-1000, 1000, n)
-        running_time = HeapSort(sample_list).sort_my_list()
-        print "N = {} : {}sec".format(n,running_time)
-        x.append(n)
-        y.append(running_time)
-        
-    # create and show a plot
-    pl.plot(x,y,'o')
-    pl.title("Heap Sort")
-    pl.xlabel('N')
-    pl.ylabel('Running Time')
-    pl.show()
+#     x= []
+#     y= []
+#     for n in range(0,1001,40):
+#         sample_list = nprnd.randint(-1000, 1000, n)
+#         running_time = HeapSort(sample_list).sort_my_list()
+#         print "N = {} : {}sec".format(n,running_time)
+#         x.append(n)
+#         y.append(running_time)
+#         
+#     # create and show a plot
+#     pl.plot(x,y,'o')
+#     pl.title("Heap Sort")
+#     pl.xlabel('N')
+#     pl.ylabel('Running Time')
+#     pl.show()
  
