@@ -7,6 +7,9 @@ class HeapSort:
     self.length = len(array) - 1 
     self.array = array
 
+  def parent(self, i):
+    return ((i-1)//2)
+
   def left(self, i):
     return 2*i
 
@@ -29,7 +32,7 @@ class HeapSort:
 
 
   def build_max_heap(self):
-    for i in range(self.length/2 - 1, 0, -1):
+    for i in range(self.parent(self.length + 1), -1, -1):
       self.max_heapify(i)
       
 
@@ -45,9 +48,11 @@ class HeapSort:
 
 def heapsort(ar):
   heapity = HeapSort(ar)
-  return heapity.heapsort()
+  heapity.heapsort()
+
 
 def main():
   N = 10
   ar = list(np.random.random_integers(0, 10, N))
   print heapsort(ar)
+   
