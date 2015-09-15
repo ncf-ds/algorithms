@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class HeapSort:
 
   def __init__(self, array):
@@ -36,13 +39,15 @@ class HeapSort:
       self.array[0], self.array[i] = self.array[i], self.array[0]
       self.length -= 1
       self.max_heapify(0)
+
     return self.array
 
 
-def main():
-  ar = [9, 3, 4, 8, 5, 1, 6, 7, 2, 0]
+def heapsort(ar):
   heapity = HeapSort(ar)
-  print heapity.heapsort()
+  return heapity.heapsort()
 
-
-main()
+def main():
+  N = 10
+  ar = list(np.random.random_integers(0, 10, N))
+  print heapsort(ar)
