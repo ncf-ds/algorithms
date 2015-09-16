@@ -1,6 +1,6 @@
 """
 @author:Shahab
-@version: 1.0
+@version: 1.2
 Group: John, Becky, Shahab
 Committee: Tanner, Carlos, Jacopo, Nathan, Shahab
 """
@@ -40,11 +40,11 @@ class HeapSort():
                 self.swap(i, greater_node_index)
                 self.down_heap(greater_node_index,size)
     
-    def up_heap(self,i,size):
+    def up_heap(self,i,end):
         p = self.find_parent(i)
-        if i>0 and i<=size and self.input_list[i] > self.input_list[p]:
+        if i>=0 and i<=end and self.input_list[i] > self.input_list[p]:
             self.swap(i, p)
-            self.up_heap(p, size)
+            self.up_heap(p, end)
     
     def heapify(self,end):
         last_parent = self.find_parent(end)  
@@ -52,47 +52,55 @@ class HeapSort():
             self.down_heap(i,end)   
     
     def up_heapify(self, end):
-        for i in range(end):
+        for i in range(end+1):
             self.up_heap(i, end)
         
     def sort_my_list(self):
-        start = time.time()
+        start = time.clock()
         N = len(self.input_list)
         for end in range(N-1,-1,-1):
             self.heapify(end)
             self.swap(0,end)
-        end  = time.time()
+        end  = time.clock()
         return end - start
     
     def sort_my_list_up_heap(self):
-        start = time.time()
+        start = time.clock()
         N = len(self.input_list)
-        for i in range(N):
-            self.up_heapify(N-i)
-            self.swap(0,N-1)
-        end  = time.time()
+        for end in range(N-1,-1,-1):
+            self.up_heapify(end)
+            self.swap(0,end)
+        end  = time.clock()
         return end - start
 
 
 if __name__ == "__main__":
-    sample_list = [0,9,3,4,0,1,9]
+    sample_list = [10,9,31,9,8]
     print "Original list: {}".format(sample_list)     
-    HeapSort(sample_list).sort_my_list_up_heap()        
+    running_time_upheap = HeapSort(sample_list).sort_my_list_up_heap() 
+    running_time_downheap  = HeapSort(sample_list).sort_my_list()     
     print "Sorted list: {}".format(sample_list)
+    print "downheap {}sec".format(running_time_downheap)
+    print "upheap {}sec".format(running_time_upheap)
     
-#     x= []
-#     y= []
-#     for n in range(0,1001,40):
-#         sample_list = nprnd.randint(-1000, 1000, n)
-#         running_time = HeapSort(sample_list).sort_my_list()
-#         print "N = {} : {}sec".format(n,running_time)
-#         x.append(n)
-#         y.append(running_time)
-#         
-#     # create and show a plot
-#     pl.plot(x,y,'o')
-#     pl.title("Heap Sort")
-#     pl.xlabel('N')
-#     pl.ylabel('Running Time')
-#     pl.show()
+    x= []
+    y,y1= [],[]
+    for n in range(0,1501,100):
+        sample_list = nprnd.randint(-1000, 1000, n)
+        running_time_upheap = HeapSort(sample_list).sort_my_list_up_heap()
+        running_time_downheap = HeapSort(sample_list).sort_my_list()
+        print "N = {} : downheap {}sec".format(n,running_time_downheap)
+        print "N = {} : upheap {}sec".format(n,running_time_upheap)
+ 
+        x.append(n)
+        y.append(running_time_downheap)
+        y1.append(running_time_upheap)
+          
+    # create and show a plot
+    pl.plot(x,y,'o')
+    pl.plot(x,y1,'--')
+    pl.title("Heap Sort")
+    pl.xlabel('N')
+    pl.ylabel('Running Time')
+    pl.show()
  
