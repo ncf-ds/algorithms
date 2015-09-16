@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+import sys
+sys.path.append("test")
 import sort_tester
 import unittest
-import sys
 sys.path.append("grp-DS3")
 from quicksort import quicksort
 
