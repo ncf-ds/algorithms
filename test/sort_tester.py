@@ -42,7 +42,7 @@ class SortTester(unittest.TestCase):
     def test_inorder(self):
         for i in range(1,100):
             for d in [-1,1,-2,2]:
-                items = range(1,i,d)
+                items =list( range(1,i,d))
                 self.trySorting(items)
 
     def test_random(self):
