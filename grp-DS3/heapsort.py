@@ -12,7 +12,7 @@ class HeapSort:
     self.last = last
 
   def parent(self, i):
-    return (((i-self.start)-1)//2) + self.start
+    return (((i-self.start))//2) + self.start
 
   def left(self, i):
     return 2*(i-self.start) + self.start
@@ -58,11 +58,6 @@ def heapsort(ar, start = 0, last = False):
     last = len(ar) - 1
   HeapSort(ar, start, last).heapsort()
 
-
-# def main():
-#   N = 10
-#   ar = list(np.random.random_integers(0, 10, N))
-#   print heapsort(ar)
    
 
 if __name__ == "__main__":

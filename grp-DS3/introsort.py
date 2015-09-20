@@ -1,7 +1,38 @@
+from math import floor, log
+import time as time
 import numpy as np
-import time
-import matplotlib.pyplot as pl
-import copy
+def partition(A, p, r):
+    """Returns a partition point.
+    Implemented with a for loop."""
+    i = p - 1
+    for j in range(p, r):
+        if A[j] < A[r]:
+            i += 1
+            A[i], A[j] = A[j], A[i]
+    A[i + 1], A[r] = A[r],  A[i + 1]
+    return i + 1
+
+def main_introsort(A):
+    length = len(A)
+    if (length == 0):
+        return
+    else:
+        maxdepth = floor(log(length))*2
+    introsort(A, 0, length - 1, maxdepth)
+
+    
+def introsort(A, p, r, maxdepth):
+    if p >= r:
+        return
+    elif (maxdepth == 0):
+        heapsort(A, p, r)
+    else:
+        q = partition(A, p, r)
+        introsort(A, p, q - 1, maxdepth - 1)
+        introsort(A, q + 1, r, maxdepth -1)
+
+
+
 
 class HeapSort:
 
@@ -45,7 +76,7 @@ class HeapSort:
 
   def heapsort(self):
     self.build_max_heap()
-    for i in range(self.last, self.start-1, -1):
+    for i in range(self.last, self.start, -1):
       self.array[self.start], self.array[i] = self.array[i], self.array[self.start]
       self.last -= 1
       self.max_heapify(self.start)
@@ -57,19 +88,11 @@ def heapsort(ar, start = 0, last = False):
   if not last:
     last = len(ar) - 1
   HeapSort(ar, start, last).heapsort()
-   
 
-if __name__ == "__main__": 
 
-  a = list(np.random.randint(-1000,1000,10))
-  b = copy.copy(a)
-  c = copy.copy(b)
-
-  print(a)
-  heapsort(a, 3)
-  print(a)
-  print(b)
-  temp = b[3:]
-  heapsort(temp, 0)
-  b[3:] = temp
-  print(b)
+if __name__ == "__main__":
+    n = 100
+    sample_list = np.random.randint(0, 1000, n)
+    print sample_list
+    main_introsort(sample_list)
+    print sample_list
