@@ -2,7 +2,7 @@ from math import floor, log
 import time as time
 import numpy as np
 import sys
-sys.path.append("collective")
+sys.path.append("../collective")
 from collective_heapsort import heapsort
 from collective_quicksort import partition
 
@@ -28,6 +28,6 @@ def introsort(A, p, r, maxdepth):
 if __name__ == "__main__":
     n = 100
     sample_list = np.random.randint(0, 1000, n)
-    print sample_list
+    print(sample_list)
     main_introsort(sample_list)
-    print sample_list
+    print(sample_list)

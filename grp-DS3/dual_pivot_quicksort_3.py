@@ -1,6 +1,6 @@
 """
 
-Dual Pivot Quicksort Version 1 for DS-grp3
+Dual Pivot Quicksort Version 3 for DS-grp3
 
 Erin Craig
 Carlos Arias
@@ -23,12 +23,12 @@ def dual_pivot_quicksort(A, left, right):
         g = right - 1
         k = l
         while k <= g:
-            if A[k] < p:
+            if A[k] <= p:
                 #Swap A[k] and A[l]
                 A[k], A[l] = A[l], A[k]
                 l += 1
             else:
-                if A[k] >= q:
+                if A[k] > q:
                     while A[g] > q and k < g:
                         g -= 1
                     #Swap A[k] and A[g]
